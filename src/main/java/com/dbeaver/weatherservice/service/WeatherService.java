@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class WeatherService {
 
     private final WeatherRepo weatherRepo;
 
+    @Cacheable("history")
     public WeatherHistory getTodayWeather() {
         LocalDate now = LocalDate.now();
         WeatherHistory weatherHistory = weatherRepo.findByDate(now);
